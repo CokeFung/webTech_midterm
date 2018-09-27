@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>adad</title>
+    <script type="text/javascript" src="sc.js"></script>
+</head>
+<body>
+
+<script>
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          showData(this);
+        }
+    };
+    xhttp.open("GET", "book.xml", true);
+    xhttp.send();
+
+    function showData(xml){
+        var xmlDoc = xml.responseXML;
+        var var_x = xmlDoc.getElementsByTagName("book");
+        for (var i = 0 ; i < var_x.length;i++){
+            var newElemt = xmlDoc.createElement("id");
+            var text = xmlDoc.createTextNode(i.toString() + " ");
+            newElemt.appendChild(text);
+            var_x[i].appendChild(newElemt);
+        }
+
+        for (var i = 0; i < var_x.length ; i++){
+            document.write("ID : " + var_x[i].getElementsByTagName("id")[0].childNodes[0].nodeValue + "\n");
+            document.write(var_x[i].getElementsByTagName("title")[0].childNodes[0].nodeValue + "\n");
+            document.write(var_x[i].getElementsByTagName("author")[0].childNodes[0].nodeValue + "\n");
+            document.write(var_x[i].getElementsByTagName("year")[0].childNodes[0].nodeValue + "\n");
+            document.write(var_x[i].getElementsByTagName("price")[0].childNodes[0].nodeValue + "\n\n\n");
+        }
+
+    }
+</script>
+</body>
+</html>
